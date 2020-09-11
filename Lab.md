@@ -39,7 +39,10 @@ About the dataset, notice the schema:
 Use the PostGIS function [`ST_Area`](https://postgis.net/docs/ST_Area.html). Since our geometries are in WGS84, we need to use `geography` type casting (`the_geom::geography`).
 
 ```SQL
--- Enter your query here
+SELECT avg(ST_Area(the_geom::geography))
+FROM university_city_osm_buildings
+
+1730.416431997879
 ```
 
 ## Find Average Area (in square meters) of buildings by type
@@ -51,7 +54,9 @@ Write a query to give:
 * count of buildings of this type
 
 ```SQL
--- Enter your SQL query here
+SELECT building_type, avg(ST_Area(the_geom::geography)), count(*) as cnt
+FROM university_city_osm_buildings
+GROUP BY building_type
 ```
 
 ## Which university building is largest? Smallest?
